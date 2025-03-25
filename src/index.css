@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Neucha&display=swap");
+
+body {
+	scrollbar-width: thin;
+	margin: 0;
+	overflow-x: hidden;
+	font-family: "Neucha", cursive;
+}
+
+::-webkit-scrollbar {
+	height: 12px;
+	width: 5px;
+	background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #5f5f5f;
+}
+
+.app {
+	width: 100vw;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #2f74c0;
+}
+
+.heading {
+	text-transform: uppercase;
+	font-size: 40px;
+	margin: 30px 0;
+	color: white;
+	z-index: 1;
+	text-align: center;
+}
+
+.line-through {
+	text-decoration-line: line-through;
+}
+
+@media (max-width: 800px) {
+	.heading {
+		margin: 15px 0;
+		font-size: 35px;
+	}
+}
