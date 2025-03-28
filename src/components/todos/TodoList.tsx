@@ -1,18 +1,25 @@
-import { useCallback } from "react";
-import { TodosListType, TodosType } from "../../../types/todos";
+import { useCallback, useState } from "react";
+import { TodosListType, TodosTypeProps } from "../../../types/todos";
 import SingleTodo from "./SingleTodo";
+import EmptyTodo from "./EmptyTodo";
 
-const TodoList = ({ todos, setTodos }: TodosListType) => {
+import "./style.css";
+import UndoBtn from "../UndoBtn";
+
+const TodoList = ({ todos, setTodos, loading }: TodosListType) => {
+	const [isShowUndo, setIsShowUndo] = useState(false);
 	const handleDeleteTodo = useCallback(
 		(id: number): void => {
 			const filterArr = todos.filter((item) => item.id !== id);
 			setTodos(filterArr);
+			setIsShowUndo(true);
 		},
 		[setTodos, todos]
 	);
 
+
 	const handleSaveEdit = useCallback(
-		(todo: TodosType) => {
+		(todo: TodosTypeProps) => {
 			const updateTodoList = todos.map((item) => {
 				if (item.id === todo.id) {
 					return todo;
@@ -21,6 +28,7 @@ const TodoList = ({ todos, setTodos }: TodosListType) => {
 				}
 			});
 			setTodos(updateTodoList);
+			localStorage.setItem("todosArr", JSON.stringify(updateTodoList));
 		},
 		[setTodos, todos]
 	);
@@ -38,21 +46,37 @@ const TodoList = ({ todos, setTodos }: TodosListType) => {
 				}
 			});
 			setTodos(updateTodoList);
+			localStorage.setItem("todosArr", JSON.stringify(updateTodoList));
 		},
 		[setTodos, todos]
 	);
 
 	return (
-		<div>
-			{todos?.map((todo, index) => (
-				<SingleTodo
-					todo={todo}
-					key={index}
-					handleSaveEdit={handleSaveEdit}
-					handleDeleteTodo={handleDeleteTodo}
-					handleDoneTodo={handleDoneTodo}
+		<div className="list__container">
+			<div className="list__container-small">
+				{todos?.length > 0 ? (
+					<>
+						{todos?.map((todo, index) => (
+							<SingleTodo
+								key={index}
+								todo={todo}
+								handleSaveEdit={handleSaveEdit}
+								handleDeleteTodo={handleDeleteTodo}
+								handleDoneTodo={handleDoneTodo}
+								
+							/>
+						))}
+					</>
+				) : (
+					!loading && <EmptyTodo />
+				)}
+				<UndoBtn
+					todos={todos}
+					isShowUndo={isShowUndo}
+					setIsShowUndo={setIsShowUndo}
+					setTodos={setTodos}
 				/>
-			))}
+			</div>
 		</div>
 	);
 };

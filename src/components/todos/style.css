@@ -1,49 +1,294 @@
-.form_container {
-	display: flex;
-	width: 95%;
-	position: relative;
+.empty_todo {
 	align-items: center;
-}
-
-.form_field {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 10px 0;
 	width: 100%;
-	border-radius: 50px;
-	padding: 20px 30px;
-	font-size: 25px;
-	border: none;
-	transition: 0.2s;
-	box-shadow: inset 0 0 5px black;
 }
 
-.form_field:focus {
-	box-shadow: 0 0 10px 1000px rgba(0, 0, 0, 0.5);
-	outline: none;
+.empty_todo__preview {
+	max-width: 240px;
+	width: 100%;
 }
-.form_btn {
+
+.empty_todo__preview img {
+	width: 100%;
+}
+.empty_todo__message {
+	font-weight: 700;
+	font-size: 20px;
+	transition: color 0.2s ease-in-out;
+}
+
+.note-parent {
+	opacity: 1;
+	overflow: hidden;
+	transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+.note {
+	align-items: center;
+	border-top: 1px solid rgba(108, 99, 255, 0.5);
+	display: flex;
+	gap: 17px;
+	padding: 17px 0;
+}
+
+.note__checkbox {
+	border: 1px solid #6c63ff;
+	border-radius: 2px;
+	cursor: pointer;
+	flex-shrink: 0;
+	height: 26px;
+	position: relative;
+	width: 26px;
+}
+
+.note__checkbox:after,
+.note__checkbox:before {
+	content: "";
+	opacity: 0;
 	position: absolute;
-	width: max-content;
-	height: 50px;
-	margin: 12px;
-	border-radius: 50px;
-	right: 0px;
-	border: none;
-	font-size: 15px;
-	background-color: #2f74c0;
-	color: white;
-	transition: 0.2s all;
-	box-shadow: 0 0 10px black;
+	transition: opacity 0.2s ease-in-out;
+}
+.note__checkbox:before {
+	background-color: #6c63ff;
+	height: 100%;
+	left: 0;
+	top: 0;
+	width: 100%;
 }
 
-.form_btn:hover {
-	background-color: #388ae2;
+.note__input,
+.note__text {
+	color: #252525;
+	cursor: pointer;
+	display: flex;
+	font-family: Kanit;
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 130%;
+	position: relative;
+	transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+	-webkit-user-select: none;
+	user-select: none;
+}
+.note__input {
+	background-color: initial;
+	height: 26px;
+	width: 100%;
 }
 
-.form_btn:active {
-	transform: scale(0.8);
-	box-shadow: 0 0 5px black;
+.note-actions {
+	align-items: center;
+	display: flex;
+	gap: 10px;
+	margin-left: auto;
+	padding: 0 8px;
+	transition: opacity 0.2s ease-in-out;
 }
 
-.form_btn:disabled {
+.note-actions__button_edit {
+	display: flex;
+	position: relative;
+}
+.note-actions__button {
+	background-color: initial;
+	height: 18px;
+	width: 18px;
+	border: 0;
+}
+
+.note-actions__button_rm {
+	position: relative;
+}
+.note-actions__button_edit:after {
+	border-bottom: 3px solid #6c63ff;
+	border-left: 3px solid #6c63ff;
+	content: "";
+	height: 7px;
+	left: 52%;
+	opacity: 0;
+	position: absolute;
+	top: 40%;
+	-webkit-transform: translate(-50%, -50%) rotate(-46deg);
+	transform: translate(-50%, -50%) rotate(-46deg);
+	transition: opacity 0.2s ease-in-out;
+	width: 14px;
+}
+.note-actions__button:hover {
+	outline: none !important;
+}
+.note-actions__button:hover svg path {
+	stroke: #6c63ff !important;
+}
+
+.note-actions.visible .note-actions__button:after,
+.note-actions.visible .note-actions__button:before {
+	opacity: 1;
+}
+.note-actions__button_edit:after {
+	border-bottom: 3px solid #6c63ff;
+	border-left: 3px solid #6c63ff;
+	content: "";
+	height: 7px;
+	left: 52%;
+	opacity: 0;
+	position: absolute;
+	top: 40%;
+	-webkit-transform: translate(-50%, -50%) rotate(-46deg);
+	transform: translate(-50%, -50%) rotate(-46deg);
+	transition: opacity 0.2s ease-in-out;
+	width: 14px;
+}
+
+.note-actions.visible {
+	opacity: 1;
+}
+
+.note-actions__button_rm:after,
+.note-actions__button_rm:before {
+	background-color: #e50000;
+	content: "";
+	height: 3px;
+	left: 0;
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+	top: 0;
+	transition: opacity 0.2s ease-in-out;
+	width: 16px;
+}
+
+.note-actions__button_rm:before {
+	-webkit-transform: rotate(45deg) translate(6px, 3px);
+	transform: rotate(45deg) translate(6px, 3px);
+}
+
+.note-actions__button_rm:after {
+	-webkit-transform: rotate(-45deg) translate(-3px, 6px);
+	transform: rotate(-45deg) translate(-3px, 6px);
+}
+
+.note__checkbox:after,
+.note__checkbox:before {
+	content: "";
+	opacity: 0;
+	position: absolute;
+	transition: opacity 0.2s ease-in-out;
+}
+
+.note__checkbox:before {
+	background-color: #6c63ff;
+	height: 100%;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+
+.note__checkbox:after {
+	border-bottom: 2px solid #f7f7f7;
+	border-left: 2px solid #f7f7f7;
+	height: 7px;
+	left: 52%;
+	top: 40%;
+	-webkit-transform: translate(-50%, -50%) rotate(-46deg);
+	transform: translate(-50%, -50%) rotate(-46deg);
+	width: 14px;
+}
+
+.note_checked .note__checkbox:after,
+.note_checked .note__checkbox:before {
+	opacity: 1;
+}
+
+.note_checked .note__text {
 	opacity: 0.5;
-	cursor:not-allowed;
+	text-decoration: line-through;
+}
+
+.undo {
+	align-items: center;
+	background-color: #534cc2;
+	border: 2px solid #6c63ff;
+	border-radius: 4px;
+	bottom: 50px;
+	box-shadow: 0 0 4px transparent;
+	color: #f7f7f7;
+	cursor: pointer;
+	display: flex;
+	gap: 4px;
+	left: 18px;
+	opacity: 0;
+	padding: 5px 8px;
+	pointer-events: none;
+	position: absolute;
+	-webkit-transform: translateY(20px);
+	transform: translateY(20px);
+	transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out,
+		-webkit-transform 0.2s ease-in-out;
+	transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out,
+		transform 0.2s ease-in-out;
+	transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out,
+		transform 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
+}
+
+.undo.active {
+	opacity: 1;
+	pointer-events: all;
+	-webkit-transform: translateY(0);
+	transform: translateY(0);
+}
+
+.timer__sec {
+	align-items: center;
+	background-color: #534cc2;
+	border-radius: 50%;
+	display: flex;
+	font-family: Raleway;
+	font-size: 16px;
+	font-weight: 700;
+	height: 24px;
+	justify-content: center;
+	line-height: 200%;
+	transition: background-color 0.2s ease-in-out;
+	vertical-align: middle;
+	width: 24px;
+}
+
+.undo__timer {
+	align-items: center;
+	border-radius: 50%;
+	display: flex;
+	height: 28px;
+	justify-content: center;
+	margin-right: 8px;
+	pointer-events: none;
+	width: 28px;
+}
+
+.undo__icon,
+.undo__text {
+	pointer-events: none;
+}
+
+.undo__text {
+	font-size: 16px;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+.undo__icon img {
+	width: 15px;
+}
+
+@media (min-width: 991.98px) {
+	.note:hover .note-actions {
+		opacity: 1;
+	}
+}
+@media (min-width: 991.98px) {
+	.note-actions {
+		opacity: 0;
+	}
 }
