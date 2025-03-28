@@ -61,7 +61,7 @@ const Header = ({ setSearchTodo, searchTodo, setIsAddTodo, handleSearch, handleF
 					</div>
 					<SelectDropDown handleFiltered={handleFiltered} />
 					<button className="add-note-btn" onClick={()=> setIsAddTodo(true)}>
-						<span>New note</span>
+						<span style={{fontWeight:"700"}}>New note</span>
 						<img src={AddIcon} alt="add todo button" />
 					</button>
 				</div>

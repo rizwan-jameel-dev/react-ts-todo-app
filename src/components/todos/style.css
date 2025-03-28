@@ -65,7 +65,6 @@
 	color: #252525;
 	cursor: pointer;
 	display: flex;
-	font-family: Kanit;
 	font-size: 20px;
 	font-weight: 500;
 	line-height: 130%;
@@ -246,7 +245,6 @@
 	background-color: #534cc2;
 	border-radius: 50%;
 	display: flex;
-	font-family: Raleway;
 	font-size: 16px;
 	font-weight: 700;
 	height: 24px;
